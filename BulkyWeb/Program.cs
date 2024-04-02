@@ -1,4 +1,5 @@
-using BulkyWeb.Data;
+using Bulky;
+using BulkyWeb;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
