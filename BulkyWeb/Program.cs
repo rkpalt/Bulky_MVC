@@ -1,5 +1,7 @@
-using Bulky;
-using BulkyWeb;
+using BulkyBook;
+using BulkyBook.DataAccess.Repository.IRepository;
+using BulkyBook.DataAccess.Repository;
+using BulkyBookWeb;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
@@ -11,9 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
 
 var app = builder.Build();
 

@@ -1,8 +1,8 @@
-﻿using Bulky;
-using Bulky.Models;
+﻿using BulkyBook;
+using BulkyBook.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bulky
+namespace BulkyBook
 {
     public class ApplicationDbContext : DbContext
     {
