@@ -3,8 +3,9 @@ using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyBookWeb.Controllers
+namespace BulkyBookWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -24,13 +25,13 @@ namespace BulkyBookWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            
+
             if (obj.Name == obj.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             }
 
-           
+
             if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Add(obj);
@@ -47,7 +48,7 @@ namespace BulkyBookWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == Id);          
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == Id);
 
             if (categoryFromDb == null)
             {
@@ -56,6 +57,7 @@ namespace BulkyBookWeb.Controllers
             return View(categoryFromDb);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Category obj)
         {
             if (ModelState.IsValid)
@@ -83,7 +85,9 @@ namespace BulkyBookWeb.Controllers
             }
             return View(categoryFromDb);
         }
-        [HttpPost, ActionName("Delete")]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? Id)
         {
             Category? obj = _unitOfWork.Category.Get(u => u.Id == Id);
