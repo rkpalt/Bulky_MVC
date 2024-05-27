@@ -18,16 +18,10 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
-                .GetAll()
-                .Select(u => new SelectListItem
-            {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-            });
+            
             return View(objProductList);
         }
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new()
             {
@@ -38,10 +32,18 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 }),
                 Product = new Product()
             };
-            return View(productVM);
+            if (id == null || id == 0)
+            {
+                return View(productVM);
+            }
+            else
+            {
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productVM);
+            }
         }
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Create(ProductVM productVM, IFormFile? file)
         {
                        
             if (ModelState.IsValid)
