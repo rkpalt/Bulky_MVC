@@ -1,4 +1,3 @@
-using BulkyBook;
 using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.DataAccess.Repository;
 using BulkyBookWeb;
@@ -7,6 +6,7 @@ using System.Configuration;
 using Microsoft.AspNetCore.Identity;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using BulkyBook.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
