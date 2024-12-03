@@ -4,6 +4,7 @@ using BulkyBook.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyBook.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203110113_addCompanyTable")]
+    partial class addCompanyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,38 +177,6 @@ namespace BulkyBook.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Pune",
-                            Name = "TCS",
-                            PhoneNumber = "1111122222",
-                            PostalCode = "411057",
-                            State = "Maharashtra",
-                            StreetAddress = "HNJ Phase 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Pune",
-                            Name = "Infosys",
-                            PhoneNumber = "3333344444",
-                            PostalCode = "411057",
-                            State = "Maharashtra",
-                            StreetAddress = "HNJ Phase 2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Pune",
-                            Name = "Wipro",
-                            PhoneNumber = "5555566666",
-                            PostalCode = "411057",
-                            State = "Maharashtra",
-                            StreetAddress = "HNJ Phase 3"
-                        });
                 });
 
             modelBuilder.Entity("BulkyBook.Models.Product", b =>
